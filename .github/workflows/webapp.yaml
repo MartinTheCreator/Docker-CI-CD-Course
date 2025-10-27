@@ -14,8 +14,9 @@ jobs:
       - name: Checkout the code
         uses: actions/checkout@v5.0.0
       - uses: ./.github/actions/build
-        application: backend
-        docker_image_tag: mmatovski/webapp-backend
+        with:
+          application: backend
+          docker_image_tag: mmatovski/webapp-backend
 
   build-frontend:
     name: Build Frontend
@@ -24,8 +25,9 @@ jobs:
       - name: Checkout the code
         uses: actions/checkout@v5.0.0
       - uses: ./.github/actions/build
-        application: frontend
-        docker_image_tag: mmatovski/webapp-frontend
+        with:
+          application: frontend
+          docker_image_tag: mmatovski/webapp-frontend
 
   deploy-backend-dev:
     name: Deploy Backend to Kubernetes
