@@ -23,11 +23,11 @@ jobs:
     runs-on: ubuntu:latest
     steps:
       - run: echo "Deploy Backend to Kubernetes"
-  deploy-frontend-dev:
-  test-backend-dev:
-  deploy-backend-stg:
-  deploy-frontend-stg:
-  test-backend-stg:
-  deploy-backend-prd:
-  deploy-frontend-prd:
-  test-backend-prd:
+  # deploy-frontend-dev:
+  # test-backend-dev:
+  # deploy-backend-stg:
+  # deploy-frontend-stg:
+  # test-backend-stg:
+  # deploy-backend-prd:
+  # deploy-frontend-prd:
+  # test-backend-prd:
