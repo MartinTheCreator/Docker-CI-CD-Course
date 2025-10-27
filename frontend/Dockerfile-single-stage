@@ -1,0 +1,11 @@
+FROM node:22-alpine AS build-stage
+
+WORKDIR /frontend-app
+COPY package.json ./
+COPY public public
+COPY src src
+
+RUN npm install
+
+EXPOSE 3000
+CMD [ "npm", "start" ]

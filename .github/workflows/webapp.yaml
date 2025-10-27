@@ -1,0 +1,33 @@
+name: Webapp CI/CD pipeline
+
+on:
+  push:
+    branches:
+      - main
+      - master
+  workflow_dispatch:
+
+jobs:
+  build-backend:
+    name: Build Backend
+    runs-on: ubuntu:latest
+    steps:
+      - run: echo "Building Backend"
+  build-frontend:
+    name: Build Frontend
+    runs-on: ubuntu:latest
+    steps:
+      - run: echo "Building Frontend"
+  deploy-backend-dev:
+    name: Deploy Backend to Kubernetes
+    runs-on: ubuntu:latest
+    steps:
+      - run: echo "Deploy Backend to Kubernetes"
+  deploy-frontend-dev:
+  test-backend-dev:
+  deploy-backend-stg:
+  deploy-frontend-stg:
+  test-backend-stg:
+  deploy-backend-prd:
+  deploy-frontend-prd:
+  test-backend-prd:
