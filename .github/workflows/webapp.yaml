@@ -32,53 +32,62 @@ jobs:
   deploy-backend-dev:
     name: Deploy Backend to Kubernetes
     runs-on: self-hosted
+    needs: [build-backend]
     steps:
       - run: echo "Deploy Backend to Kubernetes"
 
   deploy-frontend-dev:
     name: Deploy Frontend to Kubernetes
     runs-on: self-hosted
+    needs: [build-frontend]
     steps:
       - run: echo "Deploy Frontend to Kubernetes"
 
   test-backend-dev:
     name: Run API Tests Against DEV Backend
     runs-on: self-hosted
+    needs: [deploy-backend-dev]
     steps:
       - run: echo "Running tests..."
 
   deploy-backend-stg:
     name: Deploy Backend to Kubernetes
     runs-on: self-hosted
+    needs: [build-backend]
     steps:
       - run: echo "Deploy Backend to Kubernetes"
 
   deploy-frontend-stg:
     name: Build Frontend
     runs-on: self-hosted
+    needs: [build-frontend]
     steps:
       - run: echo "Building Frontend"
 
   test-backend-stg:
     name: Run API Tests Against STG Backend
     runs-on: self-hosted
+    needs: [deploy-backend-stg]
     steps:
       - run: echo "Running tests..."
 
   deploy-backend-prd:
     name: Deploy Backend to Kubernetes
     runs-on: self-hosted
+    needs: [build-backend]
     steps:
       - run: echo "Deploy Backend to Kubernetes"
 
   deploy-frontend-prd:
     name: Build Frontend
     runs-on: self-hosted
+    needs: [build-frontend]
     steps:
       - run: echo "Building Frontend"
 
   test-backend-prd:
     name: Run API Tests Against PRD Backend
     runs-on: self-hosted
+    needs: [deploy-backend-prd]
     steps:
       - run: echo "Running tests..."
