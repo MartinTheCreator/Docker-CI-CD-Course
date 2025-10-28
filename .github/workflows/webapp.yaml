@@ -66,14 +66,14 @@ jobs:
         with:
           deplyment_name: frontend-deployment-dev
           deplyment_pod_name: frontend-dev
-          docker_image_name: mmatovski/webapp-frontend
+          docker_image_name: mmatovski/webapp-frontend:$GITHUB_SHA
       - name: Deploy Backend
         if: steps.filter.outputs.backend == 'true' 
         uses: ./.github/actions/deploy
         with:
           deplyment_name: backend-deployment-dev
           deplyment_pod_name: backend-dev
-          docker_image_name: mmatovski/webapp-backend
+          docker_image_name: mmatovski/webapp-backend:$GITHUB_SHA
 
   # deploy-backend-dev:
   #   name: Deploy Backend to Kubernetes
