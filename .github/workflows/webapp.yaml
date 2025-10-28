@@ -13,10 +13,18 @@ jobs:
     steps:
       - name: Checkout the code
         uses: actions/checkout@v5.0.0
-      - uses: ./.github/actions/build
-        with:
-          application: backend
-          docker_image_tag: mmatovski/webapp-backend
+      - uses: uses: dorny/paths-filter@v3
+        id: filter
+        with: 
+          filters: |
+            backend:
+              - 'backend/**'
+      - name: Build Backend Application
+        if: steps.filter.outputs.backend = 'true'
+        uses: ./.github/actions/build
+          with:
+            application: backend
+            docker_image_tag: mmatovski/webapp-backend
 
   build-frontend:
     name: Build Frontend
@@ -24,10 +32,18 @@ jobs:
     steps:
       - name: Checkout the code
         uses: actions/checkout@v5.0.0
-      - uses: ./.github/actions/build
-        with:
-          application: frontend
-          docker_image_tag: mmatovski/webapp-frontend
+      - uses: uses: dorny/paths-filter@v3
+        id: filter
+        with: 
+          filters: |
+            frontend:
+              - 'frontend/**'
+      - name: Build Fackend Application
+        if: steps.filter.outputs.frontend = 'true'
+        uses: ./.github/actions/build
+          with:
+            application: frontend
+            docker_image_tag: mmatovski/webapp-frontend
 
   deploy-backend-dev:
     name: Deploy Backend to Kubernetes
