@@ -1,18 +1,40 @@
-name: 'Build and push docker image'
+# name: 'Build and push docker image'
+# description: 'Simple composite action for building and pushing docker images'
+# inputs:
+#   application:
+#     description: 'Application for which docker image should be build'
+#     required: true
+#   docker_image_tag:
+#     description: 'Tag how image should be set'
+#     required: true  
+# runs:
+#   using: "composite"
+#   steps:
+#     - name: Build docker image
+#       run: docker build -t ${{ inputs.docker_image_tag }} ./${{ inputs.application }}
+#       shell: bash
+#     - name: Push docker image
+#       run: docker push ${{ inputs.docker_image_tag }}
+#       shell: bash
+
+name: 'Perform deploy to Kubernetes'
 description: 'Simple composite action for building and pushing docker images'
 inputs:
-  application:
+  deplyment_name:
     description: 'Application for which docker image should be build'
     required: true
-  docker_image_tag:
+  deplyment_pod_name:
+    description: ''
+    required: true
+  docker_image_name:
     description: 'Tag how image should be set'
     required: true  
 runs:
   using: "composite"
   steps:
-    - name: Build docker image
-      run: docker build -t ${{ inputs.docker_image_tag }} ./${{ inputs.application }}
+    - name: Perform rolling deplyment
+      run: kubectl set image ${{ inputs.deplyment_name }} ${{ inputs.deplyment_pod_name }}=${{ inputs.docker_image_name }}
       shell: bash
-    - name: Push docker image
-      run: docker push ${{ inputs.docker_image_tag }}
+    - name: Perform rollout restart
+      run: kubectl rollout restart deplyment ${{ inputs.deplyment_name }}
       shell: bash

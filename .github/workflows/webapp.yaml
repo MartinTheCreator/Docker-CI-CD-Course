@@ -62,10 +62,18 @@ jobs:
               - 'backend/**'
       - name: Deploy Frontend
         if: steps.filter.outputs.frontend == 'true'
-        run: echo "Deploying frontend"
+        uses: ./.github/actions/deploy
+        with:
+          deplyment_name: frontend-deployment-dev
+          deplyment_pod_name: frontend-dev
+          docker_image_name: mmatovski/webapp-frontend
       - name: Deploy Backend
         if: steps.filter.outputs.backend == 'true' 
-        run: echo "Deploying backend"
+        uses: ./.github/actions/deploy
+        with:
+          deplyment_name: backend-deployment-dev
+          deplyment_pod_name: backend-dev
+          docker_image_name: mmatovski/webapp-backend
 
   # deploy-backend-dev:
   #   name: Deploy Backend to Kubernetes
