@@ -22,9 +22,9 @@ jobs:
       - name: Build Backend Application
         if: steps.filter.outputs.backend = 'true'
         uses: ./.github/actions/build
-          with:
-            application: backend
-            docker_image_tag: mmatovski/webapp-backend
+        with:
+          application: backend
+          docker_image_tag: mmatovski/webapp-backend
 
   build-frontend:
     name: Build Frontend
@@ -41,9 +41,9 @@ jobs:
       - name: Build Fackend Application
         if: steps.filter.outputs.frontend = 'true'
         uses: ./.github/actions/build
-          with:
-            application: frontend
-            docker_image_tag: mmatovski/webapp-frontend
+        with:
+          application: frontend
+          docker_image_tag: mmatovski/webapp-frontend
 
   deploy-backend-dev:
     name: Deploy Backend to Kubernetes
