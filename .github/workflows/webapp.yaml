@@ -45,6 +45,28 @@ jobs:
           application: frontend
           docker_image_tag: mmatovski/webapp-frontend
 
+  deploy-dev:
+    name: Deploy to Kubernetes - DEV
+    runs-on: self-hosted
+    needs: [build-backend,build-frontend]
+    steps:
+      - name: Checkout the code
+        uses: actions/checkout@v5.0.0
+      - uses: dorny/paths-filter@v3
+        id: filter
+        with: 
+          filters: |
+            frontend:
+              - 'frontend/**'
+            backend:
+              - 'backend/**'
+      - name: Deploy Frontend
+        if: steps.filter.outputs.frontend == 'true'
+        run: echo "Deploying frontend"
+      - name: Deploy Backend
+        if: steps.filter.outputs.backend == 'true' 
+        run: echo "Deploying backend"
+
   deploy-backend-dev:
     name: Deploy Backend to Kubernetes
     runs-on: self-hosted
